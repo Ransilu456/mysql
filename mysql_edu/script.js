@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-    /* ── Hamburger nav toggle (index.html) ───────────────────────── */
     var hamburger = document.getElementById('nav-hamburger');
     var mobileNav = document.getElementById('clean-nav');
     if (hamburger && mobileNav) {
@@ -8,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
             hamburger.classList.toggle('open');
             mobileNav.classList.toggle('open');
         });
-        // Close nav when a link is clicked
         mobileNav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
                 hamburger.classList.remove('open');
@@ -17,11 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /* ── Sidebar toggle (course.html) ────────────────────────────── */
     var sidebarToggle = document.getElementById('sidebar-toggle');
     var sidebar = document.querySelector('.course-sidebar');
     if (sidebarToggle && sidebar) {
-        // Inject overlay element
         var overlay = document.createElement('div');
         overlay.className = 'sidebar-overlay';
         document.body.appendChild(overlay);
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
             sidebar.classList.contains('mobile-open') ? closeSidebar() : openSidebar();
         });
         overlay.addEventListener('click', closeSidebar);
-        // Close when a TOC link is tapped on mobile
         sidebar.querySelectorAll('.toc-link').forEach(function (link) {
             link.addEventListener('click', function () {
                 if (window.innerWidth <= 768) { closeSidebar(); }
@@ -49,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /* ── Responsive Table Wrapper ─────────────────────────────────── */
     document.querySelectorAll('.doc-table').forEach(function (table) {
         var wrapper = document.createElement('div');
         wrapper.className = 'doc-table-wrap';
@@ -57,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
         wrapper.appendChild(table);
     });
 
-    /* ── Copy buttons ─────────────────────────────────────────────── */
     var COPY_ICON = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
     var CHECK_ICON = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
@@ -66,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var pre = editor.querySelector('pre');
         if (!header || !pre) return;
 
-        // Wrap existing text in a span so it stays left-aligned
         if (!header.querySelector('.editor-filename')) {
             var span = document.createElement('span');
             span.className = 'editor-filename';
@@ -90,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     btn.classList.remove('copied');
                 }, 2000);
             }).catch(function () {
-                // Fallback for older browsers
                 var ta = document.createElement('textarea');
                 ta.value = pre.innerText || pre.textContent;
                 ta.style.position = 'fixed';
@@ -111,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
         header.appendChild(btn);
     });
 
-    /* ── Simulator tabs ───────────────────────────────────────────── */
     var simBtns = document.querySelectorAll('.sim-btn');
     simBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -125,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    /* ── Sidebar TOC active link ──────────────────────────────────── */
     var tocLinks = document.querySelectorAll('.toc-link');
     var moduleLabel = document.getElementById('current-module');
 
@@ -145,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.doc-section').forEach(function (s) { observer.observe(s); });
 
-    /* ── Quiz feedback ────────────────────────────────────────────── */
     window.checkQuiz = function (btn, correct) {
         var fb = document.getElementById('quiz-feedback');
         if (!fb) return;
