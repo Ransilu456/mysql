@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -57,6 +57,9 @@
     </aside>
     <main class="course-main">
         <header class="course-top-nav">
+            <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
             <div class="breadcrumb">Course / <span id="current-module">Introduction</span></div>
             <a href="index.html" class="back-home">Back to Home</a>
         </header>
@@ -77,9 +80,9 @@
 <tbody>
 <tr><td>License</td><td>GPL / Commercial</td><td>Open Source</td><td>Public Domain</td></tr>
 <tr><td>Transactions</td><td class="yes">Full ACID</td><td class="yes">Full ACID</td><td>Partial</td></tr>
-<tr><td>Foreign Keys</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+<tr><td>Foreign Keys</td><td><span class="tag-yes">Yes</span></td><td><span class="tag-yes">Yes</span></td><td><span class="tag-yes">Yes</span></td></tr>
 <tr><td>Best For</td><td>Web apps, LAMP stack</td><td>Complex queries, JSON</td><td>Embedded, mobile apps</td></tr>
-<tr><td>Horizontal Scaling</td><td>Replication, Cluster</td><td>Extensions</td><td class="no">No</td></tr>
+<tr><td>Horizontal Scaling</td><td>Replication, Cluster</td><td>Extensions</td><td><span class="tag-no">No</span></td></tr>
 </tbody>
 </table>
 </section>
@@ -163,11 +166,11 @@ C:\xampp\mysql\bin\mysql.exe -u root -p
 <table class="doc-table">
 <thead><tr><th>Tool</th><th>Type</th><th>Best For</th><th>Free?</th></tr></thead>
 <tbody>
-<tr><td>phpMyAdmin</td><td>Web UI</td><td>Quick browsing, exports</td><td class="yes">Yes</td></tr>
-<tr><td>MySQL Workbench</td><td>Desktop GUI</td><td>Schema design, ER diagrams</td><td class="yes">Yes</td></tr>
+<tr><td>phpMyAdmin</td><td>Web UI</td><td>Quick browsing, exports</td><td><span class="tag-yes">Yes</span></td></tr>
+<tr><td>MySQL Workbench</td><td>Desktop GUI</td><td>Schema design, ER diagrams</td><td><span class="tag-yes">Yes</span></td></tr>
 <tr><td>DBeaver</td><td>Desktop GUI</td><td>Multi-database support</td><td class="yes">Yes (Community)</td></tr>
 <tr><td>TablePlus</td><td>Desktop GUI</td><td>Fast, modern UI</td><td>Freemium</td></tr>
-<tr><td>MySQL CLI</td><td>Terminal</td><td>Scripting, automation</td><td class="yes">Yes</td></tr>
+<tr><td>MySQL CLI</td><td>Terminal</td><td>Scripting, automation</td><td><span class="tag-yes">Yes</span></td></tr>
 </tbody>
 </table>
 </section><section id="arch-internals" class="doc-section">
@@ -267,11 +270,11 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Feature</th><th>InnoDB</th><th>MyISAM</th><th>Memory</th></tr></thead>
   <tbody>
-    <tr><td>Transactions</td><td class="yes">Full ACID</td><td class="no">None</td><td class="no">None</td></tr>
+    <tr><td>Transactions</td><td class="yes">Full ACID</td><td><span class="tag-no">None</span></td><td><span class="tag-no">None</span></td></tr>
     <tr><td>Locking</td><td>Row-level</td><td>Table-level</td><td>Table-level</td></tr>
-    <tr><td>Foreign Keys</td><td class="yes">Supported</td><td class="no">Not supported</td><td class="no">Not supported</td></tr>
-    <tr><td>Crash Recovery</td><td class="yes">Redo Log</td><td class="no">Manual repair</td><td class="no">Lost on restart</td></tr>
-    <tr><td>Full-Text Search</td><td class="yes">MySQL 5.6+</td><td class="yes">Yes</td><td class="no">No</td></tr>
+    <tr><td>Foreign Keys</td><td class="yes">Supported</td><td><span class="tag-no">Not supported</span></td><td><span class="tag-no">Not supported</span></td></tr>
+    <tr><td>Crash Recovery</td><td class="yes">Redo Log</td><td><span class="tag-no">Manual repair</span></td><td><span class="tag-no">Lost on restart</span></td></tr>
+    <tr><td>Full-Text Search</td><td class="yes">MySQL 5.6+</td><td><span class="tag-yes">Yes</span></td><td><span class="tag-no">No</span></td></tr>
     <tr><td>Best Use Case</td><td>All general-purpose apps</td><td>Read-heavy legacy</td><td>Temp/session data</td></tr>
   </tbody>
 </table>
@@ -308,9 +311,9 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 
 <div class="lab-box"><span class="lab-tag error">Common Mistake</span>
 <div class="code-editor"><div class="editor-header">wrong.sql</div>
-<pre>price FLOAT  -- ❌ 0.1 + 0.2 = 0.30000000004</pre></div>
+<pre>price FLOAT  -- [WRONG] 0.1 + 0.2 = 0.30000000004</pre></div>
 <div class="code-editor"><div class="editor-header">correct.sql</div>
-<pre>price <span class="k">DECIMAL</span>(10,2)  -- ✅ Exact: 0.10 + 0.20 = 0.30</pre></div>
+<pre>price <span class="k">DECIMAL</span>(10,2)  -- [CORRECT] Exact: 0.10 + 0.20 = 0.30</pre></div>
 </div>
 
 <h3>String Types</h3>
@@ -329,10 +332,10 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Type</th><th>Format</th><th>Range</th><th>Timezone Aware</th></tr></thead>
   <tbody>
-    <tr><td><code>DATE</code></td><td>YYYY-MM-DD</td><td>1000 to 9999</td><td>❌ No</td></tr>
-    <tr><td><code>DATETIME</code></td><td>YYYY-MM-DD HH:MM:SS</td><td>1000 to 9999</td><td>❌ No</td></tr>
-    <tr><td><code>TIMESTAMP</code></td><td>YYYY-MM-DD HH:MM:SS</td><td>1970 to 2038</td><td>✅ UTC stored</td></tr>
-    <tr><td><code>TIME</code></td><td>HH:MM:SS</td><td>-838 to 838 hours</td><td>❌ No</td></tr>
+    <tr><td><code>DATE</code></td><td>YYYY-MM-DD</td><td>1000 to 9999</td><td><span class="tag-no">No</span></td></tr>
+    <tr><td><code>DATETIME</code></td><td>YYYY-MM-DD HH:MM:SS</td><td>1000 to 9999</td><td><span class="tag-no">No</span></td></tr>
+    <tr><td><code>TIMESTAMP</code></td><td>YYYY-MM-DD HH:MM:SS</td><td>1970 to 2038</td><td><span class="tag-yes">UTC stored</span></td></tr>
+    <tr><td><code>TIME</code></td><td>HH:MM:SS</td><td>-838 to 838 hours</td><td><span class="tag-no">No</span></td></tr>
   </tbody>
 </table>
 
@@ -378,13 +381,13 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Command</th><th>Purpose</th><th>Reversible?</th></tr></thead>
   <tbody>
-    <tr><td><code>CREATE TABLE</code></td><td>Create new table</td><td>✅ DROP TABLE</td></tr>
-    <tr><td><code>ALTER TABLE</code></td><td>Modify structure</td><td>⚠️ Partially</td></tr>
-    <tr><td><code>DROP TABLE</code></td><td>Delete table + data</td><td>❌ Permanent</td></tr>
-    <tr><td><code>TRUNCATE TABLE</code></td><td>Delete all rows, reset AUTO_INCREMENT</td><td>❌ Permanent</td></tr>
-    <tr><td><code>RENAME TABLE</code></td><td>Rename table</td><td>✅ Rename back</td></tr>
-    <tr><td><code>CREATE INDEX</code></td><td>Add index</td><td>✅ DROP INDEX</td></tr>
-    <tr><td><code>CREATE DATABASE</code></td><td>Create schema</td><td>✅ DROP DATABASE</td></tr>
+    <tr><td><code>CREATE TABLE</code></td><td>Create new table</td><td><span class="tag-yes">DROP TABLE</span></td></tr>
+    <tr><td><code>ALTER TABLE</code></td><td>Modify structure</td><td><span class="tag-warn">Partially</span></td></tr>
+    <tr><td><code>DROP TABLE</code></td><td>Delete table + data</td><td><span class="tag-no">Permanent</span></td></tr>
+    <tr><td><code>TRUNCATE TABLE</code></td><td>Delete all rows, reset AUTO_INCREMENT</td><td><span class="tag-no">Permanent</span></td></tr>
+    <tr><td><code>RENAME TABLE</code></td><td>Rename table</td><td><span class="tag-yes">Rename back</span></td></tr>
+    <tr><td><code>CREATE INDEX</code></td><td>Add index</td><td><span class="tag-yes">DROP INDEX</span></td></tr>
+    <tr><td><code>CREATE DATABASE</code></td><td>Create schema</td><td><span class="tag-yes">DROP DATABASE</span></td></tr>
   </tbody>
 </table>
 </section>
@@ -730,13 +733,13 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Function</th><th>Returns</th><th>Ignores NULL?</th></tr></thead>
   <tbody>
-    <tr><td><code>COUNT(*)</code></td><td>Total rows</td><td>❌ Counts NULLs</td></tr>
-    <tr><td><code>COUNT(col)</code></td><td>Non-null count</td><td>✅ Skips NULLs</td></tr>
-    <tr><td><code>SUM(col)</code></td><td>Total value</td><td>✅</td></tr>
-    <tr><td><code>AVG(col)</code></td><td>Average value</td><td>✅</td></tr>
-    <tr><td><code>MAX(col)</code></td><td>Largest value</td><td>✅</td></tr>
-    <tr><td><code>MIN(col)</code></td><td>Smallest value</td><td>✅</td></tr>
-    <tr><td><code>GROUP_CONCAT(col)</code></td><td>Comma-joined string</td><td>✅</td></tr>
+    <tr><td><code>COUNT(*)</code></td><td>Total rows</td><td><span class="tag-no">Counts NULLs</span></td></tr>
+    <tr><td><code>COUNT(col)</code></td><td>Non-null count</td><td><span class="tag-yes">Skips NULLs</span></td></tr>
+    <tr><td><code>SUM(col)</code></td><td>Total value</td><td><span class="tag-yes">Yes</span></td></tr>
+    <tr><td><code>AVG(col)</code></td><td>Average value</td><td><span class="tag-yes">Yes</span></td></tr>
+    <tr><td><code>MAX(col)</code></td><td>Largest value</td><td><span class="tag-yes">Yes</span></td></tr>
+    <tr><td><code>MIN(col)</code></td><td>Smallest value</td><td><span class="tag-yes">Yes</span></td></tr>
+    <tr><td><code>GROUP_CONCAT(col)</code></td><td>Comma-joined string</td><td><span class="tag-yes">Yes</span></td></tr>
   </tbody>
 </table>
 
@@ -790,11 +793,11 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Type</th><th>Structure</th><th>Supports Range?</th><th>Use Case</th></tr></thead>
   <tbody>
-    <tr><td>B-Tree</td><td>Balanced tree</td><td>✅ Yes</td><td>Default — most use cases</td></tr>
-    <tr><td>Hash</td><td>Hash table</td><td>❌ Equality only</td><td>MEMORY engine only</td></tr>
+    <tr><td>B-Tree</td><td>Balanced tree</td><td><span class="tag-yes">Yes</span></td><td>Default — most use cases</td></tr>
+    <tr><td>Hash</td><td>Hash table</td><td><span class="tag-no">Equality only</span></td><td>MEMORY engine only</td></tr>
     <tr><td>Full-Text</td><td>Inverted index</td><td>N/A</td><td>Text search (MATCH AGAINST)</td></tr>
-    <tr><td>Spatial (R-Tree)</td><td>R-Tree</td><td>✅ Geo ranges</td><td>Geographic queries</td></tr>
-    <tr><td>Composite</td><td>Multi-column B-Tree</td><td>✅ Left-prefix rule</td><td>Multi-column WHERE</td></tr>
+    <tr><td>Spatial (R-Tree)</td><td>R-Tree</td><td><span class="tag-yes">Geo ranges</span></td><td>Geographic queries</td></tr>
+    <tr><td>Composite</td><td>Multi-column B-Tree</td><td><span class="tag-yes">Left-prefix rule</span></td><td>Multi-column WHERE</td></tr>
   </tbody>
 </table>
 
@@ -898,10 +901,10 @@ age &gt; 18 <span class="cm">-- expression token</span></pre></div>
 <table class="doc-table">
   <thead><tr><th>Level</th><th>Dirty Read</th><th>Non-Repeatable Read</th><th>Phantom Read</th></tr></thead>
   <tbody>
-    <tr><td>READ UNCOMMITTED</td><td>✅ Possible</td><td>✅ Possible</td><td>✅ Possible</td></tr>
-    <tr><td>READ COMMITTED</td><td>❌ Prevented</td><td>✅ Possible</td><td>✅ Possible</td></tr>
-    <tr><td>REPEATABLE READ (default)</td><td>❌</td><td>❌ Prevented</td><td>✅ Possible</td></tr>
-    <tr><td>SERIALIZABLE</td><td>❌</td><td>❌</td><td>❌ Prevented</td></tr>
+    <tr><td>READ UNCOMMITTED</td><td><span class="tag-yes">Possible</span></td><td><span class="tag-yes">Possible</span></td><td><span class="tag-yes">Possible</span></td></tr>
+    <tr><td>READ COMMITTED</td><td><span class="tag-no">Prevented</span></td><td><span class="tag-yes">Possible</span></td><td><span class="tag-yes">Possible</span></td></tr>
+    <tr><td>REPEATABLE READ (default)</td><td><span class="tag-no">--</span></td><td><span class="tag-no">Prevented</span></td><td><span class="tag-yes">Possible</span></td></tr>
+    <tr><td>SERIALIZABLE</td><td><span class="tag-no">--</span></td><td><span class="tag-no">--</span></td><td><span class="tag-no">Prevented</span></td></tr>
   </tbody>
 </table>
 

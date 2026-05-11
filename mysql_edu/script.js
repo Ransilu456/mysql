@@ -1,5 +1,62 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    /* ── Hamburger nav toggle (index.html) ───────────────────────── */
+    var hamburger = document.getElementById('nav-hamburger');
+    var mobileNav = document.getElementById('clean-nav');
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+        });
+        // Close nav when a link is clicked
+        mobileNav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                hamburger.classList.remove('open');
+                mobileNav.classList.remove('open');
+            });
+        });
+    }
+
+    /* ── Sidebar toggle (course.html) ────────────────────────────── */
+    var sidebarToggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.querySelector('.course-sidebar');
+    if (sidebarToggle && sidebar) {
+        // Inject overlay element
+        var overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+
+        function openSidebar() {
+            sidebar.classList.add('mobile-open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        sidebarToggle.addEventListener('click', function () {
+            sidebar.classList.contains('mobile-open') ? closeSidebar() : openSidebar();
+        });
+        overlay.addEventListener('click', closeSidebar);
+        // Close when a TOC link is tapped on mobile
+        sidebar.querySelectorAll('.toc-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (window.innerWidth <= 768) { closeSidebar(); }
+            });
+        });
+    }
+
+    /* ── Responsive Table Wrapper ─────────────────────────────────── */
+    document.querySelectorAll('.doc-table').forEach(function (table) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'doc-table-wrap';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+
     /* ── Copy buttons ─────────────────────────────────────────────── */
     var COPY_ICON = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
     var CHECK_ICON = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';

@@ -316,13 +316,11 @@ code { background: #f3f4f6; padding: 0.15rem 0.45rem; border-radius: 4px; font-f
     .footer-inner { grid-template-columns: 1fr; }
     .hero-stats { flex-wrap: wrap; }
     .clean-nav { display: none; }
-    .course-sidebar { display: none; }
-    .course-main { margin-left: 0; }
     .content-wrapper { padding: 2rem 1.5rem 6rem; }
 }
 
 /* Three-table grid for 2NF decomposition */
-.three-table-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.25rem; }
+.three-table-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.25rem; }
 .three-table-grid .doc-table { margin: 0; }
 
 /* Anomaly grid (3 boxes: 2 side by side + 1 full-width) */
@@ -337,3 +335,198 @@ code { background: #f3f4f6; padding: 0.15rem 0.45rem; border-radius: 4px; font-f
   .anomaly-grid { grid-template-columns: 1fr; }
   .anomaly-full { grid-column: 1; }
 }
+
+/* ════════════════════════════════
+   TAG BADGES (emoji-free indicators)
+   ════════════════════════════════ */
+.tag-yes {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    letter-spacing: 0.2px;
+}
+.tag-no {
+    display: inline-block;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    letter-spacing: 0.2px;
+}
+.tag-warn {
+    display: inline-block;
+    background: #fefce8;
+    color: #92400e;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    border: 1px solid #fde68a;
+    letter-spacing: 0.2px;
+}
+
+/* Module card SVG icons */
+.mc-icon svg {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════
+   HAMBURGER NAV (index.html mobile)
+   ════════════════════════════════ */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-right: auto;
+    order: -1;
+}
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ════════════════════════════════
+   SIDEBAR TOGGLE (course.html mobile)
+   ════════════════════════════════ */
+.sidebar-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+.sidebar-toggle:hover { border-color: var(--mysql-blue); color: var(--mysql-blue); }
+
+/* Course sidebar overlay for mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 98;
+}
+.sidebar-overlay.active { display: block; }
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE — index.html
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+    /* Header */
+    .clean-header .container { flex-wrap: wrap; gap: 0.75rem; }
+    .nav-hamburger { display: flex; }
+    .clean-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        margin-left: 0;
+        border-top: 1px solid var(--border);
+        padding-top: 0.75rem;
+        padding-bottom: 0.5rem;
+        order: 10;
+    }
+    .clean-nav.open { display: flex; }
+    .clean-nav li { width: 100%; }
+    .clean-nav a { display: block; padding: 0.5rem 0; font-size: 0.95rem; }
+    .nav-cta { display: none; }
+
+    /* Hero */
+    .hero { padding: 4rem 0 3.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero p { font-size: 1rem; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .hero-stats { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .stat-div { display: none; }
+    .stat { padding: 0 1rem; }
+
+    /* Curriculum cards */
+    .module-cards { grid-template-columns: 1fr; }
+    .module-cards .module-card:nth-child(4),
+    .module-cards .module-card:nth-child(5) { grid-column: auto; }
+    .module-card { flex-direction: row; gap: 1rem; padding: 1.25rem; }
+    .mc-icon { width: 44px; height: 44px; }
+
+    /* Normalization teaser */
+    .norm-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* Practical split */
+    .practical-split { grid-template-columns: 1fr; }
+
+    /* Footer */
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { flex-wrap: wrap; }
+
+    /* General section */
+    .section-head h2 { font-size: 2rem; }
+}
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE — course.html
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+    /* Sidebar hidden off-canvas on mobile */
+    .course-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 99;
+        box-shadow: none;
+    }
+    .course-sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+    }
+    .course-main { margin-left: 0; }
+    .sidebar-toggle { display: flex; align-items: center; }
+
+    /* Top nav adjustments */
+    .course-top-nav { padding: 0.7rem 1.25rem; gap: 0.75rem; }
+    .breadcrumb { font-size: 0.78rem; }
+
+    /* Content wrapper */
+    .content-wrapper { padding: 2rem 1.25rem 6rem; }
+    .doc-section h1 { font-size: 2rem; }
+    .doc-section h2 { font-size: 1.7rem; }
+
+    /* Tables scroll horizontally */
+    .doc-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .doc-table { min-width: 480px; }
+
+    /* Practical splits */
+    .practical-split { grid-template-columns: 1fr; }
+    .three-table-grid { grid-template-columns: 1fr; }
+    .anomaly-grid { grid-template-columns: 1fr; }
+    .anomaly-full { grid-column: 1; }
+}
+
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.9rem; }
+    .hero p { font-size: 0.95rem; }
+    .btn { padding: 0.75rem 1.5rem; font-size: 0.88rem; }
+    .mc-icon { width: 38px; height: 38px; border-radius: 8px; }
+    .norm-text h2 { font-size: 2rem; }
+}
+
